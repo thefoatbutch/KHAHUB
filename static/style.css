@@ -1,0 +1,11 @@
+body { background:#000; color:#0ff; font-family: 'Courier New'; margin:0; padding:20px; }
+.title { font-size:3em; text-align:center; color:#00ffcc; text-shadow:0 0 20px #0ff; margin:0; }
+.tabs { text-align:center; margin:20px 0; }
+.tab { display:inline-block; padding:15px 30px; background:#001111; border:2px solid #0ff; margin:0 10px; cursor:pointer; transition:0.3s; }
+.tab.active { background:#002233; box-shadow:0 0 20px #0ff; }
+.panel { display:none; padding:20px; background:#111; border:2px solid #0ff; min-height:70vh; }
+.panel.active { display:block; }
+#editor { width:100%; height:60vh; background:#000; color:#0f0; border:2px solid #0ff; padding:padding10px; font-size:16px; }
+button { background:#0ff; color:#000; border:none; padding:15px 30px; font-size:18px; cursor:pointer; margin-top:10px; }
+.editable { border:3px solid rgba(0,170,255,0.6) !important; background:rgba(0,100,255,0.15); padding:10px; border-radius:8px; min-height:50px; }
+#output { color:#ffcc00; }
