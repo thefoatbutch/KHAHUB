@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KHAHUB – Khaled's Bot Maker</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+  <h1 class="title">KHAHUB</h1>
+  <div class="tabs">
+    <div class="tab active" onclick="tab('code')">Code</div>
+    <div class="tab" onclick="tab('preview')">Live Preview</div>
+    <div class="tab" onclick="tab('proxies')">Proxies ({proxy_count})</div>
+  </div>
+
+  <div id="code" class="panel active">
+    <textarea id="editor" spellcheck="false">
+create <web>
+  show <html>
+    <h1>WELCOME TO KHAHUB</h1>
+    <input type="text" placeholder="Username">
+    <input type="password" placeholder="Password">
+    <button onclick="alert('Owned by Khaled')">LOGIN</button>
+  </html>
+
+  change <html with changes>
+    <h1 style="color:red;">HACKED BY KHALED</h1>
+    <marquee>YOU JUST GOT KHAHUB'D</marquee>
+  </html>
+
+  add(random(math:letters,numbers,16))
+  add(random(math:ip))
+
+  repeat 20
+    log('Bot active with proxy: ' + random(proxy))
+  if end
+
+  local owner = "Khaled"
+  log('Owner: ' + owner)
+</textarea>
+    <button onclick="run()">RUN KHAHUB SCRIPT</button>
+  </div>
+
+  <div id="preview" class="panel"><div id="output"></div></div>
+  <div id="proxies" class="panel"><pre id="proxy_list">Loading live proxies...</pre></div>
+
+<script>
+let proxy_count = 0;
+function tab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  if(id==='proxies') updateProxies();
+}
+
+async function run() {
+  const code = document.getElementById('editor').value;
+  const res = await fetch('/execute', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({code})
+  });
+  const data = await res.json();
+  document.getElementById('output').innerHTML = data.output;
+  proxy_count = data.proxy_count;
+  document.querySelector('.tabs').children[2].innerText = `Proxies (${proxy_count})`;
+}
+
+async function updateProxies() {
+  const res = await fetch('/execute', {method:'POST', body:JSON.stringify({code:""})});
+  const data = await res.json();
+  document.getElementById('proxy_list').textContent = data.random_proxy;
+}
+
+run(); // Auto-run on load
+</script>
+</body>
+</html>
