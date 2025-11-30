@@ -1,0 +1,8 @@
+### Step 3: Push to GitHub (One Command)
+```bash
+git init
+git add .
+git commit -m "KHAHUB LAUNCHED – Khaled owns"
+git branch -M main
+git remote add origin https://github.com/YOUR-USERNAME/KHAHUB.git
+git push -u origin main
